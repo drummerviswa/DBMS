@@ -56,3 +56,33 @@
 --     end //
 -- delimiter ;
 -- select fdiv(10,2);
+
+-- all
+-- delimiter $$
+-- create function op(a int,b int)
+-- returns varchar(100)
+-- deterministic
+-- begin
+--     declare result varchar(100);
+--     SELECT concat("Sum: ",cast(fadd(a,b) as char(10)),
+--     " Difference: ",cast(fsub(a,b) as char(10)),
+--     " Multiplication: ",cast(fmul(a,b) as char(10)),
+--     " Division: ",cast(fdiv(a,b) as char(10))
+--     )  into result;
+--     return result;
+-- end $$
+-- delimiter ;
+-- select op(5,2);
+
+-- Maximum
+-- delimiter //
+-- create function maximum()
+--     returns int
+--     deterministic
+--     begin
+--         declare m int;
+--         select max(p_cost) into m from Product;
+--         return m;
+--     end //
+-- delimiter ;
+-- select *,maximum() as max_price from product where p_cost=maximum();
